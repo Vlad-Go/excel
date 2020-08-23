@@ -20,5 +20,8 @@
     "url": "https://github.com/Vlad-Go/excel/issues"
   },
   "homepage": "https://github.com/Vlad-Go/excel#readme",
-
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
 }
