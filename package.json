@@ -1,0 +1,23 @@
+{
+  "name": "excel",
+  "version": "0.0.1",
+  "description": "Pure JS Excel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vlad-Go/excel.git"
+  },
+  "keywords": [
+    "js",
+    "excel"
+  ],
+  "author": "Vlad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vlad-Go/excel/issues"
+  },
+  "homepage": "https://github.com/Vlad-Go/excel#readme"
+}
