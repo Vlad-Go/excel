@@ -6,7 +6,9 @@
       "node": true
    },
    "rules": {
-
+      "linebreak-style": ["error", "windows"],
+      "comma-dangle": ["error", "never"],
+      "eol-last": ["error", "never"]
     },
    "extends": ["eslint:recommended", "google"]
  }
