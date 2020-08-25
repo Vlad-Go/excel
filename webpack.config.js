@@ -40,7 +40,6 @@ module.exports = {
   devServer: {
     port: 3000,
     hot: isDev,
-    writeToDisk: true,
     watchContentBase: true
   },
   plugins: [
