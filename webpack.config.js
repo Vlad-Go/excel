@@ -40,6 +40,7 @@ module.exports = {
   devServer: {
     port: 3000,
     hot: isDev,
+    writeToDisk: true,
     watchContentBase: true
   },
   plugins: [
@@ -47,13 +48,14 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src/favicon.ico'),
-          to: path.resolve(__dirname, 'dist')
+          from: path.resolve(__dirname, 'src/img'),
+          to: path.resolve(__dirname, 'dist/img')
         }
       ]
     }),
     new HtmlWebpackPlugin({
       template: 'index.html',
+      favicon: 'favicon.ico',
       minify: {
         removeComments: isProd,
         collapseWhitespace: isProd

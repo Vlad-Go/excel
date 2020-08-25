@@ -1,0 +1,30 @@
+@mixin btn ($hoverС) {
+   background-color: transparent;
+   border: 1px solid transparent;
+   outline: none;
+   cursor: pointer; 
+   width: 30px;
+   height: 30px;
+   border-radius: 3px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transition: all 300ms;
+   img{
+     width: 15px;
+     height: 15px;
+   }
+   &:hover{
+     background-color: $hoverС;
+   }
+   
+}
+
+@mixin mainCeil {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: $color-3;
+   border-right: 1px solid $borderColor;
+   border-bottom: 1px solid $borderColor;
+}

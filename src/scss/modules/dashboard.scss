@@ -1,0 +1,146 @@
+.dashboard {
+
+   // .dashboard__header
+   &__header {
+      padding: 20px 0;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+   // .dashboard__header-title
+   &__header-title {
+      font-size: 22px;
+      line-height: 24px;
+      color: $titleColor;
+   }
+   // .dashboard__create
+   &__create {
+      color: $txtColorSecond;
+      background-color: $main;
+      padding: 25px 0 35px;
+   }
+   // .dashboard__create-menu
+   &__create-menu {
+     display: flex;
+   }
+    // .dashboard__create-menu-caption
+   &__create-menu-caption{
+      display: block;
+      font-size: 16px;
+      line-height: 30px;
+      margin-left: 8px;
+   }
+   // .dashboard__create-cards
+   &__create-cards {
+      margin-top: 20px;
+      display: flex;
+   }
+   // .dashboard__create-item
+   &__create-item {
+      cursor: pointer;
+      & + .dashboard__create-item{
+         margin-left: 20px;
+      }
+   }
+   // .dashboard__create-card
+   &__create-card {
+      width: 165px;
+      height: 120px;
+      border-radius: 3px;
+      background-color: $txtColorSecond;
+      transition: all 300ms;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & svg {
+         height: 50px;
+         width: 50px;
+         fill: $plusImg;
+         position: relative;
+         z-index: 5;
+      }
+      &::after{
+         content: "";
+         position: absolute;
+         top: 0 ;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         background-color: rgba($main,.3);
+         opacity: 0;
+         transition: all 300ms;
+         z-index: 1;
+      }
+      &:hover::after{
+        opacity: 1;
+      }
+      &:hover svg{
+         fill: white;
+       }
+   }
+   // .dashboard__create-card-caption
+   &__create-card-caption {
+      font-weight: 500;
+      font-size: 15px;
+      height: 19px;
+      margin-top: 10px;
+      color: $color-3;
+   }
+   // .dashboard__tables
+   &__tables {
+      padding: 20px 0;
+   }
+   // .dashboard__tables-menu
+   &__tables-menu {
+      display: flex;
+      justify-content: space-between;
+      & span{
+         font-size: 16px;
+         line-height: 24px;
+      }
+   }
+   // .dashboard__tables-wrapper
+   &__tables-wrapper {
+      margin-top: 15px;
+   }
+   // .dashboard__table
+   &__table {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 30px;
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      &-left{
+         display: flex;
+         align-items: center;
+      }
+      &:hover{
+         background-color: rgba($main,.3); 
+      }
+   }
+   // .dashboard__table-img
+   &__table-img {
+      width: 25px;
+      height: 25px;
+   }
+   // .dashboard__table-name
+   &__table-name {
+      color: $titleColor;
+      text-decoration: none;
+      cursor: pointer;
+      margin-left: 25px;
+      &:hover{
+         text-decoration: underline;
+      }
+   }
+   // .dashboard__table-date
+   &__table-date {
+      color: $txtColor;
+   }
+}

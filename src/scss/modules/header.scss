@@ -1,0 +1,42 @@
+.excel {
+   // .excel__header
+   &__header {
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+      padding-top: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid $borderColor;
+   }
+   // .excel__header-title
+   &__header-title {
+      border: 2px solid transparent;
+      border-radius: 2px;
+      color: $titleColor;
+      font-size: 18px;
+      height: 30px;
+      line-height: 22px;
+      margin: 0;
+      min-width: 1px;
+      padding: 2px 7px;
+      width: fit-content;
+      &:hover{
+         border: 2px solid $second;
+      }
+      &:focus{
+         border-radius: 4px;
+         outline: none;
+         border: 2px solid $outline;
+      }
+   }
+   // .excel__header-box
+   &__header-box {
+      display: flex;
+      align-items: center;
+   }
+   // .excel__header-btn
+   &__header-btn{
+      margin-left: 10px;
+     @include btn($main);
+   }
+}

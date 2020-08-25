@@ -1,5 +1,34 @@
 @import '@/../node_modules/normalize.css';
-
+*,*::after , *::before{
+   box-sizing: border-box;
+}
+html{
+   box-sizing: inherit;
+}
+body{
+   margin: 0;
+   padding: 0;
+   font-family: Roboto;
+   font-weight: normal;
+   font-size: 13px; 
+}
+h1,h2,h3,h4,h5,h6,p{
+   margin: 0;
+}
+.container{
+   padding-left: 20px;
+   padding-right: 20px;
+}
+.dashboard-container{
+   max-width:1040px;
+   padding: 0 20px;
+   margin: 0 auto;
+}
+.main-img{
+   width: 50px;
+   height: 50px;
+   margin-right: 10px;
+}
 @import "vars";
 @import "mixins";
 
@@ -7,3 +36,5 @@
 @import "modules/toolbar";
 @import "modules/formula";
 @import "modules/table";
+
+@import "modules/dashboard";

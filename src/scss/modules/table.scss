@@ -1,0 +1,46 @@
+.excel {
+   &__table{
+      padding-bottom: 2px;
+      overflow: auto;
+   }
+   // .excel__table-row
+   &__table-row {
+      display: flex;
+      min-height: 20px;
+      height: 24px;
+   }
+   // .excel__table-row-info
+   &__table-row-info {
+      width: 46px;
+      height: 100%;
+      @include mainCeil;
+   }
+   // .excel__table-row-data
+   &__table-row-data {
+      display: flex;
+   }
+   // .excel__table-data-column
+   &__table-data-column {
+      @include mainCeil;
+      width: 90px;
+      min-width: 40px;
+      height: 100%;
+   }
+   &__table-data-ceil{
+      height: 100%;
+      padding: 5px;
+      width: 90px;
+      display: flex;
+      align-items: center;
+      border: 1px solid $borderColor;
+      border-top: 0;
+      border-left: 0;
+      &:focus{
+         outline: none;
+        }
+      &.selected{
+       border: none;
+       outline: 2px solid $outline
+      }
+   }
+}

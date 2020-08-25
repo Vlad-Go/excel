@@ -1,0 +1,12 @@
+.excel {
+   // .excel__toolbar
+   &__toolbar {
+      display: flex;
+      border-bottom: 1px solid $borderColor;
+   }
+   // .excel__toolbar-btn
+   &__toolbar-btn {
+      @include btn($second);
+      margin: 5px 0;
+   }
+}
