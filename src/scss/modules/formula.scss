@@ -1,0 +1,34 @@
+.excel {
+   // .excel__formula
+   &__formula {
+      display: flex;
+      border-bottom: 1px solid $borderColor;
+   }
+   // .excel__formula-btn
+   &__formula-label {
+      position: relative;
+      padding: 2px 22px;
+      img{
+         width: 18px;
+         height: 18px;
+      }
+      &::after{
+         content: '';
+         position: absolute;
+         right: 0;
+         top: 50%;
+         transform: translateY(-50%);
+         height: 80%;
+         width: 1px;
+         background-color: $borderColor;
+      }
+   }
+   // .excel__formula-value
+   &__formula-value {
+      flex-grow: 1;
+      outline: none;
+      display: flex;
+      align-items: center;
+      padding: 2px 10px;
+   }
+}
