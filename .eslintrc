@@ -8,7 +8,16 @@
    "rules": {
       "linebreak-style": ["error", "windows"],
       "comma-dangle": ["error", "never"],
-      "eol-last": ["error", "never"]
+      "eol-last": ["error", "never"],
+      "require-jsdoc": ["error", {
+         "require": {
+             "FunctionDeclaration": true,
+             "MethodDefinition": false,
+             "ClassDeclaration": false,
+             "ArrowFunctionExpression": false,
+             "FunctionExpression": false
+         }
+     }]
     },
    "extends": ["eslint:recommended", "google"]
  }
