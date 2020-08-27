@@ -4,7 +4,7 @@ export class Header extends ExcelComponent {
   // static className = 'excel__header';
   constructor($root) {
     super($root, {
-      name: 'header',
+      name: 'Header',
       listeners: ['click']
     });
   }
@@ -23,5 +23,8 @@ export class Header extends ExcelComponent {
         </button> 
     </div> 
     `;
+  }
+  onClick(e) {
+    console.log(e.target);
   }
 }
