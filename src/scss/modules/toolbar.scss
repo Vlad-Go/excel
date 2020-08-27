@@ -3,6 +3,8 @@
    &__toolbar {
       display: flex;
       border-bottom: 1px solid $borderColor;
+      padding-left: 20px;
+      padding-right: 20px;
    }
    // .excel__toolbar-btn
    &__toolbar-btn {

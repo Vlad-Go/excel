@@ -11,7 +11,7 @@
    }
    // .excel__table-row-info
    &__table-row-info {
-      width: 46px;
+      min-width: 46px;
       height: 100%;
       @include mainCeil;
    }
