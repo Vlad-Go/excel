@@ -20,7 +20,6 @@ export class Excel {
     this.components = this.components.map((Component, index) => {
       const $el = $.create('div', classNames[index]);
       const component = new Component($el);
-      // window.table = component;
       $el.html(component.toHTML());
       $root.append($el);
       return component;
