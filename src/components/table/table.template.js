@@ -10,11 +10,11 @@ export const getTableTemplete = (rowCount = 25) => {
 
   // create table heder row
   const headerColunm = createHeaderColumns(columnCount);
-  rows.push(createRow(' ', headerColunm));
+  rows.push(createRow('', headerColunm));
 
   // create table  rows
   for (let i = 0; i < rowCount; i++) {
-    const column = createColumn(columnCount);
+    const column = createCeil(columnCount);
     rows.push(createRow(i + 1, column));
   }
 
@@ -32,26 +32,44 @@ const createHeaderColumns = (columnCount) =>{
 const toLetter = (_, index) =>{
   return String.fromCharCode(charCode.A + index);
 };
-const toColumn = (letter) =>{
+const toColumn = (letter, index) =>{
   return `
-  <div class="excel__table-data-column">
+  <div class="excel__table-data-column" data-col="${index}">
      ${letter}
+     <div class="column-resize" data-resize="col"></div>
   </div>`;
 };
 
 
+// const createRow = (info, data) =>{
+//   const shouldResizer =
+//   info ? `<div class="row-resize" data-resize="row"></div>` : '';
+//   const row = `
+//     <div class="excel__table-row" data-row="${info}>
+//       <div class="excel__table-row-info"> ${info}  ${shouldResizer}</div>
+//       <div class="excel__table-row-data"> ${data} </div>
+//     </div>`;
+//   return row;
+// };
 const createRow = (info, data) =>{
+  const shouldResizer =
+   info ? `<div class="row-resize" data-resize="row"></div>` : '';
   const row = `
-    <div class="excel__table-row">
-      <div class="excel__table-row-info"> ${info}</div>
-      <div class="excel__table-row-data"> ${data} </div>
+    <div class="excel__table-row" data-row="${info}">
+      <div class="excel__table-row-info" data-row="${info}">
+         ${info} ${shouldResizer}
+      </div>
+      <div class="excel__table-row-data"> ${data} </div> 
     </div>`;
   return row;
 };
-const createColumn = (columnCount) =>{
+const createCeil = (columnCount) =>{
   const columns = [];
   for (let i = 0; i < columnCount; i++) {
-    columns.push(`<div class="excel__table-data-ceil" contenteditable></div>`);
+    columns.push(
+        `<div class="excel__table-data-ceil" contenteditable data-col="${i}">
+        </div>`
+    );
   }
   return columns.join(' ');
 };

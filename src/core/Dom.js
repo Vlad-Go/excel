@@ -37,6 +37,34 @@ class Dom {
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback);
   }
+
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector);
+  }
+
+  find(selector) {
+    return this.$el.querySelector(selector);
+  }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+  data(type) {
+    return this.$el.dataset[type];
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach((key)=>{
+      this.$el.style[key] = styles[key];
+    });
+  }
+
+  width() {
+    return this.$el.clientWidth;
+  }
+  height() {
+    return this.$el.clientHeight;
+  }
 }
 
 
