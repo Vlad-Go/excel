@@ -1,5 +1,6 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {getTableTemplete} from './table.template';
+import {resizeHandler} from './table.resize';
 
 
 export class Table extends ExcelComponent {
@@ -7,17 +8,15 @@ export class Table extends ExcelComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['input', 'click']
+      listeners: ['mousedown']
     });
   }
   toHTML() {
-    return getTableTemplete();
+    return getTableTemplete(50);
   }
-  onClick(e) {
-    console.log(this.$root);
-    console.log(e.target);
-  }
-  onInput(e) {
-    console.log(e.target);
+  onMousedown(e) {
+    if (e.target.dataset.resize) {
+      resizeHandler(e, this.$root);
+    }
   }
 }

@@ -2,17 +2,28 @@
    &__table{
       padding-bottom: 2px;
       overflow: auto;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 40px;
+      flex-grow: 1;
+      border-bottom: 2px solid $main;
    }
    // .excel__table-row
    &__table-row {
       display: flex;
       min-height: 20px;
       height: 24px;
+      position: relative;
+      z-index: 10;
    }
    // .excel__table-row-info
    &__table-row-info {
       min-width: 46px;
       height: 100%;
+      position: relative;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
       @include mainCeil;
    }
    // .excel__table-row-data
@@ -25,11 +36,16 @@
       width: 90px;
       min-width: 40px;
       height: 100%;
+      position: relative;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
    }
    &__table-data-ceil{
       height: 100%;
       padding: 5px;
       width: 90px;
+      min-width: 40px;
       display: flex;
       align-items: center;
       border: 1px solid $borderColor;
@@ -42,5 +58,35 @@
        border: none;
        outline: 2px solid $outline
       }
+   }
+}
+.column-resize{
+   position: absolute;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   width: 5px;
+   background-color: $outline;
+   cursor: col-resize;
+   opacity: 0;
+   transition: opacity  200ms;
+   z-index: 100;
+   &:hover{
+      opacity: 1!important;
+   }
+}
+.row-resize{
+   position: absolute;
+   right: 0;
+   left: 0;
+   bottom: 0;
+   height: 5px;
+   background-color: $outline;
+   cursor: row-resize;
+   opacity: 0;
+   transition: opacity  200ms;
+   z-index: 100;
+   &:hover{
+      opacity: 1!important;
    }
 }

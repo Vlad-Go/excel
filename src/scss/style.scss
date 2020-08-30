@@ -25,6 +25,11 @@ h1,h2,h3,h4,h5,h6,p{
    height: 50px;
    margin-right: 10px;
 }
+.app, .excel{
+   max-height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
 @import "vars";
 @import "mixins";
 
