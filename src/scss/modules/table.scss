@@ -21,10 +21,11 @@
       min-width: 46px;
       height: 100%;
       position: relative;
+      z-index: 1;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-      @include mainCeil;
+      @include mainCell;
    }
    // .excel__table-row-data
    &__table-row-data {
@@ -32,7 +33,7 @@
    }
    // .excel__table-data-column
    &__table-data-column {
-      @include mainCeil;
+      @include mainCell;
       width: 90px;
       min-width: 40px;
       height: 100%;
@@ -41,7 +42,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
    }
-   &__table-data-ceil{
+   &__table-data-cell{
       height: 100%;
       padding: 5px;
       width: 90px;
@@ -51,6 +52,8 @@
       border: 1px solid $borderColor;
       border-top: 0;
       border-left: 0;
+      position: relative;
+      z-index: 5;
       &:focus{
          outline: none;
         }

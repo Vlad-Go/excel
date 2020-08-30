@@ -36,7 +36,7 @@ export const resizeHandler = (e, $root) =>{
         width: columWidth + delta +'px'
       });
       $columnCeils
-          .forEach((ceil) => ceil.style.width = columWidth + delta +'px');
+          .forEach((cell) => cell.style.width = columWidth + delta +'px');
     };
   }
 

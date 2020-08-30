@@ -67,7 +67,7 @@ const createCeil = (columnCount) =>{
   const columns = [];
   for (let i = 0; i < columnCount; i++) {
     columns.push(
-        `<div class="excel__table-data-ceil" contenteditable data-col="${i}">
+        `<div class="excel__table-data-cell" contenteditable data-col="${i}">
         </div>`
     );
   }

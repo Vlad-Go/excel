@@ -1,6 +1,7 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {getTableTemplete} from './table.template';
 import {resizeHandler} from './table.resize';
+import {select} from './Table-selection';
 
 
 export class Table extends ExcelComponent {
@@ -8,7 +9,7 @@ export class Table extends ExcelComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown']
+      listeners: ['mousedown', 'click']
     });
   }
   toHTML() {
@@ -17,6 +18,11 @@ export class Table extends ExcelComponent {
   onMousedown(e) {
     if (e.target.dataset.resize) {
       resizeHandler(e, this.$root);
+    }
+  }
+  onClick(e) {
+    if (e.target.classList.contains('excel__table-data-cell')) {
+      select(e);
     }
   }
 }
