@@ -55,8 +55,8 @@ const createRow = (info, data) =>{
   const shouldResizer =
    info ? `<div class="row-resize" data-resize="row"></div>` : '';
   const row = `
-    <div class="excel__table-row" data-row="${info}">
-      <div class="excel__table-row-info" data-row="${info}">
+    <div class="excel__table-row" >
+      <div class="excel__table-row-info">
          ${info} ${shouldResizer}
       </div>
       <div class="excel__table-row-data"> ${data} </div> 
