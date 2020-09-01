@@ -43,7 +43,7 @@ class Dom {
   }
 
   find(selector) {
-    return this.$el.querySelector(selector);
+    return $(this.$el.querySelector(selector));
   }
 
   closest(selector) {
@@ -64,6 +64,15 @@ class Dom {
   }
   height() {
     return this.$el.clientHeight;
+  }
+  addClass(className) {
+    this.$el.classList.add(className);
+  }
+  removeClass(className) {
+    this.$el.classList.remove(className);
+  }
+  cellId(i) {
+    return parseInt(this.$el.dataset.id.split(':')[i]);
   }
 }
 

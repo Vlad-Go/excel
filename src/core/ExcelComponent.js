@@ -8,8 +8,13 @@ export class ExcelComponent extends DomEventListener {
     return ' ';
   }
 
+  prepare() {
+    console.log('prepare');
+  }
+
   init() {
     this.initDOMListeners();
+    console.log('init');
   }
   destroy() {
     this.removeDOMListeners();

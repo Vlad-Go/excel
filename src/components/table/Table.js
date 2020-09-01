@@ -1,7 +1,9 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
 import {getTableTemplete} from './table.template';
 import {resizeHandler} from './table.resize';
-import {select} from './Table-selection';
+import {TableSelection} from './Table-selection';
+import {$} from '../../core/Dom';
+import {shouldResize, isCell, isCellGroup} from './table.functions';
 
 
 export class Table extends ExcelComponent {
@@ -9,20 +11,39 @@ export class Table extends ExcelComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'click']
+      listeners: ['mousedown', 'keydown']
     });
+    this.prepare();
   }
   toHTML() {
     return getTableTemplete(50);
   }
   onMousedown(e) {
-    if (e.target.dataset.resize) {
+    if (shouldResize(e)) {
       resizeHandler(e, this.$root);
+    } else if (isCell(e)) {
+      this.selection.select($(e.target));
+    } else if (isCellGroup(e) ) {
+      this.selection.selectGroup($(e.target));
     }
   }
-  onClick(e) {
-    if (e.target.classList.contains('excel__table-data-cell')) {
-      select(e);
-    }
+  prepare() {
+    this.selection = new TableSelection();
   }
+  init() {
+    super.init();
+    const firstCell = this.$root.find('[data-id="0:0"]');
+    this.selection.select(firstCell);
+  }
+
 }
+// onKeydown(e) {
+//   console.log(e);
+//   if (e.code === 'ArrowUp') {
+//   }
+// }
+//ArrowUp
+//ArrowDown
+//ArrowRight
+//ArrowLeft
+//Enter
