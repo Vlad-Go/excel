@@ -8,18 +8,19 @@ export class TableSelection {
     this.group = [];
   }
   select($cell) {
-    clear(this.group);
+    this.clear();
     $cell.addClass('selected');
+    $cell.focus();
     this.group.push($cell);
     this.$current = $cell;
   }
   selectGroup($cell) {
-    clear(this.group);
-    const startColumn = this.$current.cellId(1);
-    const startRow = +this.$current.cellId(0);
+    this.clear();
+    const currentCords = this.$current.cellId();
+    const {row: startRow, col: startColumn} = currentCords;
 
-    const endColumn = +$cell.cellId(1);
-    const endRow = +$cell.cellId(0);
+    const endCords = $cell.cellId();
+    const {row: endRow, col: endColumn} = endCords;
 
     const rangeRow = range(startRow, endRow);
     const rangeCol = range(startColumn, endColumn);
@@ -35,12 +36,12 @@ export class TableSelection {
       this.group.push($cell);
     });
   }
+
+
+  clear() {
+    this.group.forEach((cell)=> {
+      cell.removeClass('selected');
+    });
+    this.group = [];
+  }
 }
-
-
-const clear = (group) =>{
-  group.forEach((cell)=> {
-    cell.removeClass('selected');
-  });
-  group = [];
-};

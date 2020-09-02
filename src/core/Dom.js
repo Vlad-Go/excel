@@ -71,8 +71,17 @@ class Dom {
   removeClass(className) {
     this.$el.classList.remove(className);
   }
-  cellId(i) {
-    return parseInt(this.$el.dataset.id.split(':')[i]);
+  cellId() {
+    const row = parseInt(this.$el.dataset.id.split(':')[0]);
+    const col = parseInt(this.$el.dataset.id.split(':')[1]);
+
+    return {
+      row,
+      col
+    };
+  }
+  focus() {
+    this.$el.focus();
   }
 }
 

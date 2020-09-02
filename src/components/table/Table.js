@@ -6,6 +6,15 @@ import {$} from '../../core/Dom';
 import {shouldResize, isCell, isCellGroup} from './table.functions';
 
 
+const keys = [
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowRight',
+  'ArrowLeft',
+  'Enter',
+  'Tab'
+];
+
 export class Table extends ExcelComponent {
   // static className = 'excel__table';
   constructor($root) {
@@ -27,6 +36,48 @@ export class Table extends ExcelComponent {
       this.selection.selectGroup($(e.target));
     }
   }
+  onKeydown(e) {
+    if (keys.includes(e.code)) {
+      const currentCords = this.selection.$current.cellId();
+      const {row, col} = currentCords;
+      e.preventDefault();
+      const MIN_VALUE = 0;
+
+      switch (e.code) {
+        case 'ArrowUp': {
+          if (row > MIN_VALUE) {
+            const selector = `[data-id="${row-1}:${col}"]`;
+            const $next = this.$root.find(selector);
+            this.selection.select($next);
+          }
+          break;
+        }
+        case 'Enter':
+        case 'ArrowDown': {
+          const selector = `[data-id="${row+1}:${col}"]`;
+          const $next = this.$root.find(selector);
+          this.selection.select($next);
+          break;
+        }
+        case 'Tab':
+        case 'ArrowRight': {
+          const selector = `[data-id="${row}:${col+1}"]`;
+          const $next = this.$root.find(selector);
+          this.selection.select($next);
+          break;
+        }
+        case 'ArrowLeft': {
+          if (col > MIN_VALUE) {
+            const selector =`[data-id="${row}:${col-1}"]`;
+            const $next = this.$root.find(selector);
+            this.selection.select($next);
+          }
+          break;
+        }
+      }
+    }
+  }
+
   prepare() {
     this.selection = new TableSelection();
   }
@@ -35,15 +86,4 @@ export class Table extends ExcelComponent {
     const firstCell = this.$root.find('[data-id="0:0"]');
     this.selection.select(firstCell);
   }
-
 }
-// onKeydown(e) {
-//   console.log(e);
-//   if (e.code === 'ArrowUp') {
-//   }
-// }
-//ArrowUp
-//ArrowDown
-//ArrowRight
-//ArrowLeft
-//Enter
