@@ -17,10 +17,11 @@ const keys = [
 
 export class Table extends ExcelComponent {
   // static className = 'excel__table';
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown']
+      listeners: ['mousedown', 'keydown'],
+      ...options
     });
     this.prepare();
   }
@@ -32,6 +33,7 @@ export class Table extends ExcelComponent {
       resizeHandler(e, this.$root);
     } else if (isCell(e)) {
       this.selection.select($(e.target));
+      this.$emmit('selectNewCell:table', [e.target.textContent.trim()]);
     } else if (isCellGroup(e) ) {
       this.selection.selectGroup($(e.target));
     }
@@ -41,8 +43,8 @@ export class Table extends ExcelComponent {
       const currentCords = this.selection.$current.cellId();
       const {row, col} = currentCords;
       e.preventDefault();
-      const MIN_VALUE = 0;
 
+      const MIN_VALUE = 0;
       switch (e.code) {
         case 'ArrowUp': {
           if (row > MIN_VALUE) {
@@ -80,6 +82,9 @@ export class Table extends ExcelComponent {
 
   prepare() {
     this.selection = new TableSelection();
+    this.$subscribe('input:formula', (text)=>{
+      this.selection.group.forEach((cell) => cell.text(text));
+    });
   }
   init() {
     super.init();

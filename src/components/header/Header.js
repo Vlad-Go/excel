@@ -2,10 +2,10 @@ import {ExcelComponent} from '../../core/ExcelComponent';
 
 export class Header extends ExcelComponent {
   // static className = 'excel__header';
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Header',
-      listeners: ['click']
+      ...options
     });
   }
   toHTML() {
@@ -23,8 +23,5 @@ export class Header extends ExcelComponent {
         </button> 
     </div> 
     `;
-  }
-  onClick(e) {
-    console.log(e.target);
   }
 }

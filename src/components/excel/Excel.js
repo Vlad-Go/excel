@@ -1,4 +1,5 @@
 import {$} from '../../core/Dom';
+import {Emmiter} from '../../core/Emmiter';
 
 // Temp
 const classNames = [
@@ -17,9 +18,13 @@ export class Excel {
   getRoot() {
     const $root = $.create('div', 'excel');
 
+    const componentOptions = {
+      emmiter: new Emmiter()
+    };
+
     this.components = this.components.map((Component, index) => {
       const $el = $.create('div', classNames[index]);
-      const component = new Component($el);
+      const component = new Component($el, componentOptions);
       $el.html(component.toHTML());
       $root.append($el);
       return component;
