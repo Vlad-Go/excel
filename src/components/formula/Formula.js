@@ -5,14 +5,10 @@ export class Formula extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'formula',
-      listeners: ['input'],
+      listeners: ['input', 'keydown'],
       ...options
     });
     this.$root = $root;
-
-    this.$subscribe('selectNewCell:table', (text)=>{
-      this.$formulaInput.text(text);
-    });
   }
   toHTML() {
     return `
@@ -24,7 +20,25 @@ export class Formula extends ExcelComponent {
   }
 
   onInput(e) {
+    // emmit value from formula to current cell
     this.$emmit('input:formula', [e.target.textContent]);
+  }
+  onKeydown(e) {
+    const keys = ['Enter', 'Tab'];
+    if (keys.includes(e.code)) {
+      e.preventDefault();
+      this.$emit('formula:done');
+    }
+  }
+  prepare() {
+    // subscribe to cell value for formula
+    this.$subscribe('selectCell:table', (cellText)=>{
+      this.$formulaInput.text(cellText);
+    });
+    // subscribe to cell value for formula
+    this.$subscribe('cellInput:table', (text)=>{
+      this.$formulaInput.text(text);
+    });
   }
   init() {
     super.init();

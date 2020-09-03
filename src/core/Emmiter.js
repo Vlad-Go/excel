@@ -7,5 +7,8 @@ export class Emmiter {
   }
   subscribe(event, fn) {
     this.listeners[event] = fn;
+    return () => {
+      this.listeners = this.listeners.filter((fn)=> fn != fn);
+    };
   }
 }

@@ -3,7 +3,7 @@ import {getTableTemplete} from './table.template';
 import {resizeHandler} from './table.resize';
 import {TableSelection} from './Table-selection';
 import {$} from '../../core/Dom';
-import {shouldResize, isCell, isCellGroup} from './table.functions';
+import {shouldResize, isCell, isCellGroup, switchKey} from './table.functions';
 
 
 const keys = [
@@ -20,10 +20,9 @@ export class Table extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['mousedown', 'keydown', 'input'],
       ...options
     });
-    this.prepare();
   }
   toHTML() {
     return getTableTemplete(50);
@@ -33,57 +32,36 @@ export class Table extends ExcelComponent {
       resizeHandler(e, this.$root);
     } else if (isCell(e)) {
       this.selection.select($(e.target));
-      this.$emmit('selectNewCell:table', [e.target.textContent.trim()]);
+      // emmit value from cell to formula
+      this.$emmit('selectCell:table', [this.selection.$current.text()]);
     } else if (isCellGroup(e) ) {
       this.selection.selectGroup($(e.target));
     }
   }
   onKeydown(e) {
     if (keys.includes(e.code)) {
-      const currentCords = this.selection.$current.cellId();
-      const {row, col} = currentCords;
       e.preventDefault();
-
-      const MIN_VALUE = 0;
-      switch (e.code) {
-        case 'ArrowUp': {
-          if (row > MIN_VALUE) {
-            const selector = `[data-id="${row-1}:${col}"]`;
-            const $next = this.$root.find(selector);
-            this.selection.select($next);
-          }
-          break;
-        }
-        case 'Enter':
-        case 'ArrowDown': {
-          const selector = `[data-id="${row+1}:${col}"]`;
-          const $next = this.$root.find(selector);
-          this.selection.select($next);
-          break;
-        }
-        case 'Tab':
-        case 'ArrowRight': {
-          const selector = `[data-id="${row}:${col+1}"]`;
-          const $next = this.$root.find(selector);
-          this.selection.select($next);
-          break;
-        }
-        case 'ArrowLeft': {
-          if (col > MIN_VALUE) {
-            const selector =`[data-id="${row}:${col-1}"]`;
-            const $next = this.$root.find(selector);
-            this.selection.select($next);
-          }
-          break;
-        }
-      }
+      const currentCords = this.selection.$current.cellId();
+      const $next = this.$root.find(switchKey(e, currentCords));
+      this.selection.select($next);
+      // emmit value from cell to formula
+      this.$emmit('selectCell:table', [this.selection.$current.text()]);
     }
+  }
+  onInput(e) {
+    // emmit value from cell to formula
+    this.$emmit('cellInput:table', [e.target.textContent.trim()]);
   }
 
   prepare() {
     this.selection = new TableSelection();
-    this.$subscribe('input:formula', (text)=>{
-      this.selection.group.forEach((cell) => cell.text(text));
+    // subscribe to formula value for current cell
+    this.$subscribe('input:formula', (formulaText)=>{
+      this.selection.group.forEach((cell) => cell.text(formulaText));
+    });
+    // subscribe to formula done event
+    this.$subscribe('input:formula', ()=>{
+      this.selection.$current.focus();
     });
   }
   init() {
