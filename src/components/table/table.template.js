@@ -14,7 +14,7 @@ export const getTableTemplete = (rowCount = 25) => {
 
   // create table  rows
   for (let i = 0; i < rowCount; i++) {
-    const column = createCeil(columnCount);
+    const column = createCell(i, columnCount);
     rows.push(createRow(i + 1, column));
   }
 
@@ -41,19 +41,10 @@ const toColumn = (letter, index) =>{
 };
 
 
-// const createRow = (info, data) =>{
-//   const shouldResizer =
-//   info ? `<div class="row-resize" data-resize="row"></div>` : '';
-//   const row = `
-//     <div class="excel__table-row" data-row="${info}>
-//       <div class="excel__table-row-info"> ${info}  ${shouldResizer}</div>
-//       <div class="excel__table-row-data"> ${data} </div>
-//     </div>`;
-//   return row;
-// };
 const createRow = (info, data) =>{
   const shouldResizer =
    info ? `<div class="row-resize" data-resize="row"></div>` : '';
+
   const row = `
     <div class="excel__table-row" >
       <div class="excel__table-row-info">
@@ -63,11 +54,13 @@ const createRow = (info, data) =>{
     </div>`;
   return row;
 };
-const createCeil = (columnCount) =>{
+const createCell = (rowCount, columnCount) =>{
   const columns = [];
-  for (let i = 0; i < columnCount; i++) {
+  for (let cell = 0; cell < columnCount; cell++) {
     columns.push(
-        `<div class="excel__table-data-ceil" contenteditable data-col="${i}">
+        `<div class="excel__table-data-cell" contenteditable 
+          data-id=${rowCount +':' + cell} 
+          data-col="${cell}">
         </div>`
     );
   }
