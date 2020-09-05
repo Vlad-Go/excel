@@ -3,11 +3,11 @@ export const shouldResize = (e) => {
 };
 
 export const isCell = (e) => {
-  return e.target.classList.contains('excel__table-data-cell') && !e.shiftKey;
+  return e.target.dataset.cell && !e.shiftKey;
 };
 
 export const isCellGroup = (e) => {
-  return e.target.classList.contains('excel__table-data-cell') && e.shiftKey;
+  return e.target.dataset.cell && e.shiftKey;
 };
 
 export const switchKey = (e, {row, col}) => {
@@ -16,6 +16,8 @@ export const switchKey = (e, {row, col}) => {
     case 'ArrowUp': {
       if (row > MIN_VALUE) {
         return `[data-id="${row-1}:${col}"]`;
+      } else {
+        return `[data-id="${row}:${col}"]`;
       }
       break;
     }
@@ -32,6 +34,8 @@ export const switchKey = (e, {row, col}) => {
     case 'ArrowLeft': {
       if (col > MIN_VALUE) {
         return `[data-id="${row}:${col-1}"]`;
+      } else {
+        return `[data-id="${row}:${col}"]`;
       }
       break;
     }

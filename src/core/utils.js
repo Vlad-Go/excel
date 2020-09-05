@@ -9,4 +9,12 @@ export const range = (start, end) => {
   return new Array(end - start + 1)
       .fill('')
       .map((_, index) => start + index);
-}
+};
+
+export const storage = (data) => {
+  if (data) {
+    localStorage.setItem('excelData', JSON.stringify(data));
+  } else {
+    return JSON.parse(localStorage.getItem('excelData'));
+  }
+};

@@ -1,5 +1,7 @@
 import {$} from '../../core/Dom';
 import {Emmiter} from '../../core/Emmiter';
+import {createStore} from '../../core/store';
+
 
 // Temp
 const classNames = [
@@ -19,7 +21,11 @@ export class Excel {
     const $root = $.create('div', 'excel');
 
     const componentOptions = {
-      emmiter: new Emmiter()
+      emmiter: new Emmiter(),
+      store: createStore({
+        colState: {},
+        rowState: {}
+      })
     };
 
     this.components = this.components.map((Component, index) => {
