@@ -1,7 +1,6 @@
 import {$} from '../../core/Dom';
 import {Emmiter} from '../../core/Emmiter';
-import {createStore} from '../../core/store';
-
+import {StoreSubscriber} from '../../core/StoreSubscriber';
 
 // Temp
 const classNames = [
@@ -12,9 +11,11 @@ const classNames = [
 ];
 
 export class Excel {
-  constructor(selector, {components}) {
+  constructor(selector, {components}, store) {
     this.$el = $(selector);
     this.components = components || [];
+    this.store = store;
+    this.subscriber = new StoreSubscriber(this.store);
   }
 
   getRoot() {
@@ -22,10 +23,7 @@ export class Excel {
 
     const componentOptions = {
       emmiter: new Emmiter(),
-      store: createStore({
-        colState: {},
-        rowState: {}
-      })
+      store: this.store
     };
 
     this.components = this.components.map((Component, index) => {
@@ -40,6 +38,7 @@ export class Excel {
 
   render() {
     this.$el.append(this.getRoot());
+    this.subscriber.subscribe(this.components);
     this.components.forEach((component) => component.init());
   }
   destroy() {

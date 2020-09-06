@@ -1,15 +1,23 @@
-import {storage} from '../../core/utils';
-const cellsWidth = storage().colState;
-const rowsWidth = storage().rowState;
+
 const MIN_HEIGHT = '24px';
 const MIN_WIDTH = '120px';
+let state;
+let cellData;
+let cellsWidth;
+let rowsHeight;
+
 const charCode = {
   A: 65,
   Z: 90
 };
 
 
-export const getTableTemplete = (rowCount = 25) => {
+export const getTableTemplete = (rowCount = 25, store) => {
+  state = store.getState();
+  cellsWidth = state.colState;
+  rowsHeight = state.rowState;
+  cellData = state.cellData;
+
   const columnCount = charCode.Z - charCode.A;
   const rows = [];
 
@@ -42,7 +50,6 @@ const toLetter = (_, index) =>{
 };
 const toColumn = (letter, index) =>{
   const width = cellsWidth[index] ? cellsWidth[index] + 'px' : MIN_WIDTH;
-
   return `
   <div class="excel__table-data-column" 
                     data-col="${index}"
@@ -55,7 +62,7 @@ const toColumn = (letter, index) =>{
 
 
 const createRow = (info, data) =>{
-  const height = rowsWidth[info] ? rowsWidth[info] + 'px' : MIN_HEIGHT;
+  const height = rowsHeight[info] ? rowsHeight[info] + 'px' : MIN_HEIGHT;
   const shouldResizer =
    info ? `<div class="row-resize" data-resize="row"></div>` : '';
 
@@ -69,18 +76,18 @@ const createRow = (info, data) =>{
   return row;
 };
 const createCell = (rowCount, columnCount) =>{
-  const MIN_WIDTH = '120px';
   const columns = [];
 
   for (let cell = 0; cell < columnCount; cell++) {
     const width = cellsWidth[cell] ? cellsWidth[cell] + 'px' : MIN_WIDTH;
+    const cellId = rowCount +':' + cell;
     columns.push(
         `<div class="excel__table-data-cell" contenteditable 
-          data-id=${rowCount +':' + cell} 
+          data-id=${cellId} 
           data-col='${cell}'
           data-cell='true'
           style="width:${width}">
-  
+          ${cellData[cellId] || ''}
         </div>`
     );
   }

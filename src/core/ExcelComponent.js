@@ -20,8 +20,11 @@ export class ExcelComponent extends DomEventListener {
   $dispatch(action) {
     this.store.dispatch(action);
   }
-  $storeSubs(fn) {
-    this.store.subscribe(fn);
+  // $storeSubs(fn) {
+  //   this.store.subscribe(fn);
+  // }
+  getState(store) {
+    console.log(store);
   }
 
   toHTML() {

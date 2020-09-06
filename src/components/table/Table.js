@@ -4,6 +4,7 @@ import {resizeHandler} from './table.resize';
 import {TableSelection} from './Table-selection';
 import {$} from '../../core/Dom';
 import {shouldResize, isCell, isCellGroup, switchKey} from './table.functions';
+import {resizeAction, cellInputAction} from '../../redux/actions';
 
 
 export class Table extends ExcelComponent {
@@ -16,7 +17,7 @@ export class Table extends ExcelComponent {
     });
   }
   toHTML() {
-    return getTableTemplete(50);
+    return getTableTemplete(50, this.store);
   }
   prepare() {
     this.selection = new TableSelection();
@@ -34,17 +35,16 @@ export class Table extends ExcelComponent {
     this.$subscribe('done:formula', ()=>{
       this.selection.$current.focus();
     });
+    // this.$emmit('cellInput:table', [this.selection.$current.text()]);
+    this.$dispatch(cellInputAction({
+      id: this.selection.$current.data('id'),
+      text: this.selection.$current.text()
+    }));
   }
-
-  _selectCell(cell) {
-    this.selection.select(cell);
-    this.$emmit('selectCell:table', [this.selection.$current.text()]);
-  }
-
 
   onMousedown(e) {
     if (shouldResize(e)) {
-      resizeHandler(e, this.$root, this.store);
+      this.resizeTable(e);
     }
     if (isCell(e)) {
       this._selectCell($(e.target));
@@ -69,6 +69,25 @@ export class Table extends ExcelComponent {
     }
   }
   onInput(e) {
-    this.$emmit('cellInput:table', [e.target.textContent.trim()]);
+    this.$dispatch(cellInputAction({
+      id: $(e.target).data('id'),
+      text: $(e.target).text()
+    })
+    );
+  }
+
+
+  _selectCell(cell) {
+    this.selection.select(cell);
+    // this.$emmit('selectCell:table', [this.selection.$current.text()]);
+    this.$dispatch(cellInputAction({
+      id: this.selection.$current.data('id'),
+      text: this.selection.$current.text()
+    })
+    );
+  }
+  resizeTable(e) {
+    resizeHandler(e, this.$root)
+        .then((data)=> this.$dispatch(resizeAction(data)));
   }
 }

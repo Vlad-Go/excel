@@ -1,7 +1,6 @@
-import {rootReducer} from '../redux/reducer';
-import { storage } from './utils';
+import {storage} from './utils';
 
-export function createStore(initState = {}) {
+export function createStore(rootReducer, initState = {}) {
   let state = rootReducer(initState, {type: '_INIT_'});
   const listeners = [];
 
