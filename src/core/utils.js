@@ -18,3 +18,11 @@ export const storage = (data) => {
     return JSON.parse(localStorage.getItem('excelData'));
   }
 };
+
+export const isEqual = (a, b) => {
+  if (typeof a === 'object' && typeof b === 'object') {
+    return JSON.stringify(a) === JSON.stringify(b);
+  } else {
+    return a === b;
+  }
+}

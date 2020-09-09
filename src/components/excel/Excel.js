@@ -15,6 +15,7 @@ export class Excel {
     this.$el = $(selector);
     this.components = components || [];
     this.store = store;
+    this.emmiter = new Emmiter();
     this.subscriber = new StoreSubscriber(this.store);
   }
 
@@ -22,7 +23,7 @@ export class Excel {
     const $root = $.create('div', 'excel');
 
     const componentOptions = {
-      emmiter: new Emmiter(),
+      emmiter: this.emmiter,
       store: this.store
     };
 
@@ -38,10 +39,11 @@ export class Excel {
 
   render() {
     this.$el.append(this.getRoot());
-    this.subscriber.subscribe(this.components);
+    this.subscriber.subscribeToStore(this.components);
     this.components.forEach((component) => component.init());
   }
   destroy() {
+    this.subscriber.unsubscribeFromStore();
     this.components.forEach((component) => component.destroy());
   }
 }
