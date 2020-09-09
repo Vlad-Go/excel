@@ -1,34 +1,21 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
+import {getTolbarTempete} from './tolbar.templete';
+import { $ } from '../../core/Dom';
 
 export class Toolbar extends ExcelComponent {
   // static className = 'excel__toolbar'
-  constructor($root,options) {
+  constructor($root, options) {
     super($root, {
       name: 'toolbar',
+      listeners: ['click'],
       subscribe: [''],
       ...options
     });
   }
   toHTML() {
-    return `
-      <button class="excel__toolbar-btn">
-        <img src="./img/align-left.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/align-center.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/align-right.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/bold.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/italic.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/underline.svg" alt="">
-      </button>
-    `;
+    return getTolbarTempete();
+  }
+  onClick(e) {
+    console.log($(e.target).data('value'));
   }
 }
