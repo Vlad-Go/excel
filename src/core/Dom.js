@@ -90,6 +90,12 @@ class Dom {
   focus() {
     this.$el.focus();
   }
+  getStyle(styles = []) {
+    return styles.reduce((acc, style) =>{
+      acc[style] = this.$el.style[style];
+      return acc;
+    }, {});
+  }
 }
 
 

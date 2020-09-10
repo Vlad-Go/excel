@@ -46,10 +46,11 @@ export const getTolbarTempete = (state) => {
 const toButton = (btnName, btnValue, isActive) => {
   const value =JSON.stringify(btnValue);
   const isSelect = isActive ? 'active' :'';
+  const data = `data-value='${value}' data-type="button"`;
 
   return `
-   <button class="excel__toolbar-btn ${isSelect}" data-value='${value}'>
-       <img src="./img/${btnName}.svg" data-value='${value}' alt="">
+   <button class="excel__toolbar-btn ${isSelect}" ${data}>
+       <img src="./img/${btnName}.svg" ${data} alt="">
    </button>
    `;
 };

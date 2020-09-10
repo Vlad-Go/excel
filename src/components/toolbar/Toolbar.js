@@ -1,7 +1,7 @@
 import {ExcelStateComponent} from '../../core/ExcelStateComponent';
 import {getTolbarTempete} from './tolbar.templete';
 import {$} from '../../core/Dom';
-import {initialState} from '../../redux/initialState';
+import {initialState} from '../../vars';
 
 export class Toolbar extends ExcelStateComponent {
   // static className = 'excel__toolbar'
@@ -9,17 +9,11 @@ export class Toolbar extends ExcelStateComponent {
     super($root, {
       name: 'toolbar',
       listeners: ['click'],
-      subscribe: [],
+      subscribe: ['currentStyle'],
       ...options
     });
   }
   prepare() {
-    const initialState = {
-      textAlign: 'left',
-      fontWeight: 'normal',
-      textDecoration: 'none',
-      fontStyle: 'normal'
-    };
     this.initState(initialState);
   }
   get templete() {
@@ -28,9 +22,14 @@ export class Toolbar extends ExcelStateComponent {
   toHTML() {
     return this.templete;
   }
+  changeStore({currentStyle}) {
+    this.setState(currentStyle);
+  }
   onClick(e) {
-    const style = $(e.target).data('value');
-    this.setState(JSON.parse(style));
-    console.log(this.state);
+    const $target = $(e.target);
+    if ($target.data('type') === 'button') {
+      const style = JSON.parse($target.data('value'));
+      this.$emmit('applyStyle:tolbar', [style]);
+    }
   }
 }

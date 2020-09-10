@@ -4,7 +4,8 @@ import {resizeHandler} from './table.resize';
 import {TableSelection} from './Table-selection';
 import {$} from '../../core/Dom';
 import {shouldResize, isCell, isCellGroup, switchKey} from './table.functions';
-import {resizeAction, cellInputAction} from '../../redux/actions';
+import {resizeAction, cellInputAction, currentStyle} from '../../redux/actions';
+import {initialState} from '../../vars';
 
 
 export class Table extends ExcelComponent {
@@ -34,12 +35,16 @@ export class Table extends ExcelComponent {
           (cell) => cell.text() + cell.text(formulaText)
       );
       this.$dispatch(cellInputAction({
-        id: this.selection.$current.data('id'),
+        id: this.selection.getIds(),
         text: this.selection.$current.text()
       }));
     });
     this.$subscribe('done:formula', ()=>{
       this.selection.$current.focus();
+    });
+    this.$subscribe('applyStyle:tolbar', (style)=>{
+      this.selection.applyStyle(style);
+      this.$dispatch(currentStyle(style));
     });
   }
   onMousedown(e) {
@@ -70,7 +75,7 @@ export class Table extends ExcelComponent {
   }
   onInput(e) {
     this.$dispatch(cellInputAction({
-      id: $(e.target).data('id'),
+      id: this.selection.getIds(),
       text: $(e.target).text()
     }));
   }
@@ -79,6 +84,8 @@ export class Table extends ExcelComponent {
   selectCell(cell) {
     this.selection.select(cell);
     this.$emmit('selectCell:table', [this.selection.$current.text()]);
+    const style = cell.getStyle(Object.keys(initialState));
+    this.$dispatch(currentStyle(style));
   }
   resizeTable(e) {
     resizeHandler(e, this.$root)

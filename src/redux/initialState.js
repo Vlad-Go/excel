@@ -1,10 +1,12 @@
 import {storage} from '../core/utils';
+import {initialState} from '../vars';
 
 const defaultState = {
   colState: {},
   rowState: {},
   cellData: {},
-  currentText : ''
+  currentText: '',
+  currentStyle: initialState
 };
 
 const setDefaultState = () =>{
@@ -12,4 +14,4 @@ const setDefaultState = () =>{
   return defaultState;
 };
 
-export const initialState = storage() || setDefaultState();
+export const initState = storage() || setDefaultState();

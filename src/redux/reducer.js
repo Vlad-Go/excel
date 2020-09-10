@@ -12,9 +12,13 @@ export const rootReducer = (state, action) =>{
       return {...state, [field]: prevState};
     case actions.CELL_INPUT:
       prevState = state.cellData || {};
-      prevState[action.data.id] = action.data.text;
+      action.data.id.forEach((id) => {
+        prevState[id] = action.data.text;
+      });
       return {...state, currentText: action.data.text, cellData: prevState};
-
+    case actions.CURRENT_STYLE:
+      prevState = state.currentStyle || {};
+      return {...state, currentStyle: {...prevState, ...action.data}};
 
     default: return state;
   }

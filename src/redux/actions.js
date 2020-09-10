@@ -12,3 +12,9 @@ export const cellInputAction = (data) => {
     data
   };
 };
+export const currentStyle = (data) => {
+  return {
+    type: actions.CURRENT_STYLE,
+    data
+  };
+};

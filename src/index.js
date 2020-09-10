@@ -6,9 +6,9 @@ import {Formula} from './components/formula/Formula';
 import {Table} from './components/table/Table.js';
 import {createStore} from './core/store';
 import {rootReducer} from './redux/reducer';
-import {initialState} from './redux/initialState';
+import {initState} from './redux/initialState';
 
-const store = createStore(rootReducer, initialState);
+const store = createStore(rootReducer, initState);
 
 const excel = new Excel(
     '#app',
