@@ -1,51 +1,55 @@
-export const getTolbarTempete = () => {
+export const getTolbarTempete = (state) => {
   const btns = [
     {
       name: 'align-left',
-      isActive: false,
+      isActive: state.textAlign === 'left',
       value: {textAlign: 'left'}
     },
     {
       name: 'align-center',
-      isActive: false,
+      isActive: state.textAlign === 'center',
       value: {textAlign: 'center'}
     },
     {
       name: 'align-right',
-      isActive: false,
+      isActive: state.textAlign === 'right',
       value: {textAlign: 'right'}
     },
     {
       name: 'bold',
-      isActive: false,
-      value: {fontWeight: 'bold'}
+      isActive: state.fontWeight === 'bold',
+      value: {fontWeight: state.fontWeight === 'bold' ? 'normal' : 'bold'}
     },
     {
       name: 'italic',
-      isActive: false,
-      value: {fontStyle: 'italic'}
+      isActive: state.fontStyle === 'italic',
+      value: {fontStyle: state.fontStyle === 'italic' ? 'normal' : 'italic'}
     },
     {
       name: 'underline',
-      isActive: false,
-      value: {textDecoration: 'underline'}
+      isActive: state.textDecoration === 'underline',
+      value: {textDecoration:
+        state.textDecoration === 'underline' ? 'normal' : 'underline'
+      }
     }
   ];
   const toolbar = [];
 
   btns.forEach((btn) => {
-    const button = toButton(btn.name, btn.value);
+    const button = toButton(btn.name, btn.value, btn.isActive);
     toolbar.push(button);
   });
   return toolbar.join(' ');
 };
 
 
-const toButton = (btnName, btnValue) => {
+const toButton = (btnName, btnValue, isActive) => {
+  const value =JSON.stringify(btnValue);
+  const isSelect = isActive ? 'active' :'';
+
   return `
-   <button class="excel__toolbar-btn" data-value='${JSON.stringify(btnValue)}'>
-       <img src="./img/${btnName}.svg" 
-       data-value='${JSON.stringify(btnValue)}' alt="">
+   <button class="excel__toolbar-btn ${isSelect}" data-value='${value}'>
+       <img src="./img/${btnName}.svg" data-value='${value}' alt="">
    </button>
    `;
 };
