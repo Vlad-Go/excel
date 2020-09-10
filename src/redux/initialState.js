@@ -6,6 +6,7 @@ const defaultState = {
   rowState: {},
   cellData: {},
   styleState: {},
+  title: 'New Table',
   currentText: '',
   currentStyle: initialState
 };

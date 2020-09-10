@@ -24,3 +24,9 @@ export const applyStyle = (data) => {
     data
   };
 };
+export const excelTitle = (title) => {
+  return {
+    type: actions.EXCEL_TITLE,
+    title
+  };
+};

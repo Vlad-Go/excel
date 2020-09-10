@@ -26,7 +26,8 @@ export const rootReducer = (state, action) =>{
         {...prevState[id], ...action.data.value};
       });
       return {...state, styleState: prevState};
-
+    case actions.EXCEL_TITLE:
+      return {...state, title: action.title || 'New Table'};
     default: return state;
   }
 };
