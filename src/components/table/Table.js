@@ -4,7 +4,12 @@ import {resizeHandler} from './table.resize';
 import {TableSelection} from './Table-selection';
 import {$} from '../../core/Dom';
 import {shouldResize, isCell, isCellGroup, switchKey} from './table.functions';
-import {resizeAction, cellInputAction, currentStyle} from '../../redux/actions';
+import {
+  resizeAction,
+  cellInputAction,
+  currentStyle,
+  applyStyle
+} from '../../redux/actions';
 import {initialState} from '../../vars';
 
 
@@ -45,6 +50,10 @@ export class Table extends ExcelComponent {
     this.$subscribe('applyStyle:tolbar', (style)=>{
       this.selection.applyStyle(style);
       this.$dispatch(currentStyle(style));
+      this.$dispatch(applyStyle({
+        id: this.selection.getIds(),
+        value: style
+      }));
     });
   }
   onMousedown(e) {

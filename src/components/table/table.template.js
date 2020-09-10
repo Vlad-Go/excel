@@ -1,3 +1,5 @@
+import {initialState} from '../../vars';
+import {toInlineStyle} from '../../core/utils';
 
 const MIN_HEIGHT = '24px';
 const MIN_WIDTH = '120px';
@@ -5,6 +7,7 @@ let state;
 let cellData;
 let cellsWidth;
 let rowsHeight;
+let styleState;
 
 const charCode = {
   A: 65,
@@ -17,6 +20,7 @@ export const getTableTemplete = (rowCount = 25, store) => {
   cellsWidth = state.colState;
   rowsHeight = state.rowState;
   cellData = state.cellData;
+  styleState = state.styleState;
 
   const columnCount = charCode.Z - charCode.A;
   const rows = [];
@@ -77,16 +81,18 @@ const createRow = (info, data) =>{
 };
 const createCell = (rowCount, columnCount) =>{
   const columns = [];
-
+  
   for (let cell = 0; cell < columnCount; cell++) {
     const width = cellsWidth[cell] ? cellsWidth[cell] + 'px' : MIN_WIDTH;
     const cellId = rowCount +':' + cell;
+    const styles = toInlineStyle( {...initialState, ...styleState[cellId] || null});
+    
     columns.push(
         `<div class="excel__table-data-cell" contenteditable 
           data-id=${cellId} 
           data-col='${cell}'
           data-cell='true'
-          style="width:${width}">
+          style="${styles}; width:${width}">
           ${cellData[cellId] || ''}
         </div>`
     );

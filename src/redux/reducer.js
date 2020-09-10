@@ -19,6 +19,13 @@ export const rootReducer = (state, action) =>{
     case actions.CURRENT_STYLE:
       prevState = state.currentStyle || {};
       return {...state, currentStyle: {...prevState, ...action.data}};
+    case actions.APPLY_STYLE:
+      prevState = state.styleState || {};
+      action.data.id.forEach((id) => {
+        prevState[id] =
+        {...prevState[id], ...action.data.value};
+      });
+      return {...state, styleState: prevState};
 
     default: return state;
   }

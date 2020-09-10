@@ -18,3 +18,9 @@ export const currentStyle = (data) => {
     data
   };
 };
+export const applyStyle = (data) => {
+  return {
+    type: actions.APPLY_STYLE,
+    data
+  };
+};
