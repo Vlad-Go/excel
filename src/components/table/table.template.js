@@ -81,17 +81,19 @@ const createRow = (info, data) =>{
 };
 const createCell = (rowCount, columnCount) =>{
   const columns = [];
-  
+
   for (let cell = 0; cell < columnCount; cell++) {
     const width = cellsWidth[cell] ? cellsWidth[cell] + 'px' : MIN_WIDTH;
     const cellId = rowCount +':' + cell;
-    const styles = toInlineStyle( {...initialState, ...styleState[cellId] || null});
-    
+    const styles =
+    toInlineStyle({...initialState, ...styleState[cellId] || null});
+
     columns.push(
         `<div class="excel__table-data-cell" contenteditable 
           data-id=${cellId} 
           data-col='${cell}'
           data-cell='true'
+          data-value="${cellData[cellId] || ''}"
           style="${styles}; width:${width}">
           ${cellData[cellId] || ''}
         </div>`

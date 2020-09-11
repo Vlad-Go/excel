@@ -29,9 +29,10 @@ export class Formula extends ExcelComponent {
   }
   changeStore(store) {
     this.$formulaInput.text(store.currentText);
-    console.log('formula');
   }
   onInput(e) {
+    console.log(e);
+    // if (e.target.startWith('='))
     this.$emmit('input:formula', [e.target.textContent]);
   }
   onKeydown(e) {

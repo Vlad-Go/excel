@@ -11,6 +11,7 @@ import {
   applyStyle
 } from '../../redux/actions';
 import {initialState} from '../../vars';
+import {parse} from '../../core/parse';
 
 
 export class Table extends ExcelComponent {
@@ -36,8 +37,9 @@ export class Table extends ExcelComponent {
     this.selectCell(firstCell);
 
     this.$subscribe('input:formula', (formulaText)=>{
+      this.selection.$current.attr('data-value', formulaText);
       this.selection.group.forEach(
-          (cell) => cell.text() + cell.text(formulaText)
+          (cell) => cell.text(parse(formulaText))
       );
       this.$dispatch(cellInputAction({
         id: this.selection.getIds(),
