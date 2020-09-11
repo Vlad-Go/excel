@@ -1,33 +1,35 @@
-import {ExcelComponent} from '../../core/ExcelComponent';
+import {ExcelStateComponent} from '../../core/ExcelStateComponent';
+import {getTolbarTempete} from './tolbar.templete';
+import {$} from '../../core/Dom';
+import {initialState} from '../../vars';
 
-export class Toolbar extends ExcelComponent {
+export class Toolbar extends ExcelStateComponent {
   // static className = 'excel__toolbar'
-  constructor($root,options) {
+  constructor($root, options) {
     super($root, {
       name: 'toolbar',
+      listeners: ['click'],
+      subscribe: ['currentStyle'],
       ...options
     });
   }
+  prepare() {
+    this.initState(initialState);
+  }
+  get templete() {
+    return getTolbarTempete(this.state);
+  }
   toHTML() {
-    return `
-      <button class="excel__toolbar-btn">
-        <img src="./img/align-left.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/align-center.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/align-right.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/bold.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/italic.svg" alt="">
-      </button>
-      <button class="excel__toolbar-btn">
-        <img src="./img/underline.svg" alt="">
-      </button>
-    `;
+    return this.templete;
+  }
+  changeStore({currentStyle}) {
+    this.setState(currentStyle);
+  }
+  onClick(e) {
+    const $target = $(e.target);
+    if ($target.data('type') === 'button') {
+      const style = JSON.parse($target.data('value'));
+      this.$emmit('applyStyle:tolbar', [style]);
+    }
   }
 }

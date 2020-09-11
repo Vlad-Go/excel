@@ -13,7 +13,7 @@ class Dom {
     }
   }
   text(string) {
-    if (typeof string === 'string') {
+    if (typeof string !== 'undefined') {
       this.$el.textContent = string;
     } else {
       return this.$el.textContent.trim();
@@ -89,6 +89,19 @@ class Dom {
   }
   focus() {
     this.$el.focus();
+  }
+  getStyle(styles = []) {
+    return styles.reduce((acc, style) =>{
+      acc[style] = this.$el.style[style];
+      return acc;
+    }, {});
+  }
+  attr(attr, value) {
+    if (value) {
+      this.$el.setAttribute(attr, value);
+      return this;
+    }
+    return this.$el.getAttribute(attr);
   }
 }
 

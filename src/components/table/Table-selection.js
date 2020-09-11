@@ -44,4 +44,11 @@ export class TableSelection {
     });
     this.group = [];
   }
+  applyStyle(style) {
+    this.group.forEach((cell) => cell.css(style));
+  }
+  getIds() {
+    const ids = this.group.map((cell) => cell.data('id'));
+    return ids;
+  }
 }
