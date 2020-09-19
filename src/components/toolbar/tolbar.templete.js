@@ -29,7 +29,7 @@ export const getTolbarTempete = (state) => {
       name: 'underline',
       isActive: state.textDecoration === 'underline',
       value: {textDecoration:
-        state.textDecoration === 'underline' ? 'normal' : 'underline'
+        state.textDecoration === 'underline' ? 'none' : 'underline'
       }
     }
   ];

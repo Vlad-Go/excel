@@ -1,4 +1,4 @@
-import {storage} from '../core/utils';
+import {storage, clone, getTableName} from '../core/utils';
 import {initialState} from '../vars';
 
 const defaultState = {
@@ -8,12 +8,9 @@ const defaultState = {
   styleState: {},
   title: 'New Table',
   currentText: '',
-  currentStyle: initialState
+  currentStyle: initialState,
+  openedDate: new Date().toJSON()
 };
 
-const setDefaultState = () =>{
-  storage(defaultState);
-  return defaultState;
-};
-
-export const initState = storage() || setDefaultState();
+const setDefaultState = () => clone(defaultState);
+export const initStore = () => storage(getTableName()) || setDefaultState();

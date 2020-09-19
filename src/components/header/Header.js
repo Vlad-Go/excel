@@ -1,4 +1,6 @@
 import {ExcelComponent} from '../../core/ExcelComponent';
+import {setHash} from '../../core/Router/router.functions';
+import {getTableName} from '../../core/utils';
 import {excelTitle} from '../../redux/actions';
 
 export class Header extends ExcelComponent {
@@ -6,7 +8,7 @@ export class Header extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Header',
-      listeners: ['input'],
+      listeners: ['input', 'click'],
       subscribe: ['title'],
       ...options
     });
@@ -19,11 +21,11 @@ export class Header extends ExcelComponent {
       <input type="text" class="excel__header-title" value="${title}">
     </div>
     <div class="excel__header-box">
-        <button class="excel__header-btn">
-          <img src="./img/delete.svg" alt="">
+        <button class="excel__header-btn" data-button="delete">
+          <img src="./img/delete.svg" alt="" data-button="delete">
         </button>
-        <button class="excel__header-btn">
-          <img src="./img/exit.svg" alt="">
+        <button class="excel__header-btn" data-button="exit">
+          <img src="./img/exit.svg" alt="" data-button="exit">
         </button> 
     </div> 
     `;
@@ -34,5 +36,16 @@ export class Header extends ExcelComponent {
   onInput(e) {
     const title = e.target.value;
     this.$dispatch(excelTitle(title));
+  }
+  onClick(e) {
+    const button = e.target.dataset.button;
+    if (button === 'exit') {
+      setHash('');
+    } else if (button === 'delete') {
+      const currentTableHash = getTableName();
+      debugger
+      localStorage.removeItem(currentTableHash);
+      setHash('');
+    }
   }
 }

@@ -1,3 +1,5 @@
+import {getTableId} from './Router/router.functions';
+
 export const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -11,11 +13,11 @@ export const range = (start, end) => {
       .map((_, index) => start + index);
 };
 
-export const storage = (data) => {
+export const storage = (key, data) => {
   if (data) {
-    localStorage.setItem('excelData', JSON.stringify(data));
+    localStorage.setItem(key, JSON.stringify(data));
   } else {
-    return JSON.parse(localStorage.getItem('excelData'));
+    return JSON.parse(localStorage.getItem(key));
   }
 };
 
@@ -50,3 +52,11 @@ export function debounce(fn, wait) {
     timeout = setTimeout(later, wait);
   };
 }
+export const clone = (obj) =>{
+  return JSON.parse(JSON.stringify(obj));
+};
+
+export const getTableName = () => {
+  const tableId = getTableId();
+  return 'excel:' + tableId;
+};
