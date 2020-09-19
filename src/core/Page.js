@@ -1,7 +1,7 @@
 
 export class Page {
-  constructor(params) {
-    this.params = params;
+  constructor(hash) {
+    this.hash = hash;
   }
   getRoot() {
     throw new Error('getRoot should be implemented');

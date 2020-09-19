@@ -17,9 +17,10 @@ export class Router {
     }
     this.$placeholder.clear();
 
-    const Page = getHash().includes('excel') ?
+    const hash = getHash();
+    const Page = hash.includes('excel') ?
     this.pages.excel : this.pages.dashboard;
-    this.page = new Page();
+    this.page = new Page(hash);
 
     this.$placeholder.append(this.page.getRoot());
 

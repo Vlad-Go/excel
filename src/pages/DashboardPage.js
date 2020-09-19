@@ -40,10 +40,4 @@ export class DashboardPage extends Page {
   </div>`);
     return $root;
   }
-  afterRender() {
-
-  }
-  destroy() {
-
-  }
 }
