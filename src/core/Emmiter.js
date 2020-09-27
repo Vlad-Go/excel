@@ -1,6 +1,6 @@
 export class Emmiter {
   constructor() {
-    this.listeners = {};
+    this.listeners = [];
   }
   emmit(event, args) {
     this.listeners[event](...args);
@@ -8,7 +8,7 @@ export class Emmiter {
   subscribe(event, fn) {
     this.listeners[event] = fn;
     return () => {
-      this.listeners = this.listeners.filter((fn)=> fn != fn);
+      this.listeners = this.listeners.filter((listener)=> listener != fn);
     };
   }
 }

@@ -1,3 +1,5 @@
+import {getTableId} from './Router/router.functions';
+
 export const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -11,11 +13,11 @@ export const range = (start, end) => {
       .map((_, index) => start + index);
 };
 
-export const storage = (data) => {
+export const storage = (key, data) => {
   if (data) {
-    localStorage.setItem('excelData', JSON.stringify(data));
+    localStorage.setItem(key, JSON.stringify(data));
   } else {
-    return JSON.parse(localStorage.getItem('excelData'));
+    return JSON.parse(localStorage.getItem(key));
   }
 };
 
@@ -31,22 +33,29 @@ export function camelToDashCase(str) {
   return str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
 }
 
-
 export const toInlineStyle = (styles = {}) => {
   return Object.keys(styles)
       .map((style)=> camelToDashCase(style) + ':' + styles[style])
       .join(';');
 };
 
-export function debounce(fn, wait) {
+export const debounce = (fn, wait = 300) => {
   let timeout;
   return function(...args) {
     const later = () => {
-      clearTimeout(timeout);
+      clearInterval(timeout);
       // eslint-disable-next-line
-      fn.apply(this, args)
+      fn.apply(this, args);
     };
-    clearTimeout(timeout);
+    clearInterval(timeout);
     timeout = setTimeout(later, wait);
   };
-}
+};
+export const clone = (obj) =>{
+  return JSON.parse(JSON.stringify(obj));
+};
+
+export const getTableName = () => {
+  const tableId = getTableId();
+  return 'excel:' + tableId;
+};

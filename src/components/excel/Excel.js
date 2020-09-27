@@ -11,8 +11,7 @@ const classNames = [
 ];
 
 export class Excel {
-  constructor(selector, {components}, store) {
-    this.$el = $(selector);
+  constructor({components}, store) {
     this.components = components || [];
     this.store = store;
     this.emmiter = new Emmiter();
@@ -37,8 +36,7 @@ export class Excel {
     return $root;
   }
 
-  render() {
-    this.$el.append(this.getRoot());
+  init() {
     this.subscriber.subscribeToStore(this.components);
     this.components.forEach((component) => component.init());
   }

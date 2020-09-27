@@ -1,3 +1,4 @@
+import { $ } from '../../core/Dom';
 import {ExcelComponent} from '../../core/ExcelComponent';
 
 export class Formula extends ExcelComponent {
@@ -31,9 +32,14 @@ export class Formula extends ExcelComponent {
     this.$formulaInput.text(store.currentText);
   }
   onInput(e) {
-    console.log(e);
-    // if (e.target.startWith('='))
-    this.$emmit('input:formula', [e.target.textContent]);
+    const isFX = $(e.target).text().startsWith('=');
+    if (isFX) {
+      this.$subscribe('done:formula', () => {
+        this.$emmit('input:formula', [e.target.textContent]);
+      });
+    } else {
+      this.$emmit('input:formula', [e.target.textContent]);
+    }
   }
   onKeydown(e) {
     const keys = ['Enter', 'Tab'];
