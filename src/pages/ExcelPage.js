@@ -5,18 +5,22 @@ import {Header} from '../components/header/Header';
 import {Table} from '../components/table/Table';
 import {Toolbar} from '../components/toolbar/Toolbar';
 import {Page} from '../core/Page';
-import {createStore} from '../core/store';
+import {createStore} from '../core/store/store';
 import {debounce, storage} from '../core/utils';
 import {initStore} from '../redux/initialState';
 import {rootReducer} from '../redux/reducer';
 
 
+// export class Proccesor {
+
+// }
+
+
 export class ExcelPage extends Page {
   getRoot() {
-    const store = createStore(rootReducer, initStore());
+    const store = createStore(rootReducer, initStore(this.hash));
 
     const stateListener = debounce((state) => {
-      // console.log('App State: ', state);
       storage(this.hash, state);
     }, 300);
     store.subscribe(stateListener);

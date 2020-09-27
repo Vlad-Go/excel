@@ -33,25 +33,24 @@ export function camelToDashCase(str) {
   return str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
 }
 
-
 export const toInlineStyle = (styles = {}) => {
   return Object.keys(styles)
       .map((style)=> camelToDashCase(style) + ':' + styles[style])
       .join(';');
 };
 
-export function debounce(fn, wait) {
+export const debounce = (fn, wait = 300) => {
   let timeout;
   return function(...args) {
     const later = () => {
-      clearTimeout(timeout);
+      clearInterval(timeout);
       // eslint-disable-next-line
-      fn.apply(this, args)
+      fn.apply(this, args);
     };
-    clearTimeout(timeout);
+    clearInterval(timeout);
     timeout = setTimeout(later, wait);
   };
-}
+};
 export const clone = (obj) =>{
   return JSON.parse(JSON.stringify(obj));
 };

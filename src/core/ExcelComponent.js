@@ -21,9 +21,7 @@ export class ExcelComponent extends DomEventListener {
   $dispatch(action) {
     this.store.dispatch(action);
   }
-  // $storeSubs(fn) {
-  //   this.store.subscribe(fn);
-  // }
+
   changeStore(store) {
     console.log(store);
   }
@@ -32,11 +30,9 @@ export class ExcelComponent extends DomEventListener {
     return ' ';
   }
   prepare() {
-    console.log('prepare');
   }
   init() {
     this.initDOMListeners();
-    console.log('init');
   }
   destroy() {
     this.removeDOMListeners();

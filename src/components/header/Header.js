@@ -30,20 +30,18 @@ export class Header extends ExcelComponent {
     </div> 
     `;
   }
-  changeStore({title}) {
-  }
 
   onInput(e) {
     const title = e.target.value;
     this.$dispatch(excelTitle(title));
   }
+
   onClick(e) {
     const button = e.target.dataset.button;
     if (button === 'exit') {
       setHash('');
     } else if (button === 'delete') {
       const currentTableHash = getTableName();
-      debugger
       localStorage.removeItem(currentTableHash);
       setHash('');
     }
