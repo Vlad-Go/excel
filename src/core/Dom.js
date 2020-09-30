@@ -8,6 +8,7 @@ class Dom {
   html(string) {
     if (typeof string === 'string') {
       this.$el.innerHTML = string;
+      return this.$el;
     } else {
       return this.$el.outerHTML.trim();
     }

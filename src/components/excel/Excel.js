@@ -25,7 +25,6 @@ export class Excel {
       emmiter: this.emmiter,
       store: this.store
     };
-
     this.components = this.components.map((Component, index) => {
       const $el = $.create('div', classNames[index]);
       const component = new Component($el, componentOptions);
