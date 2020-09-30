@@ -1,4 +1,4 @@
-import {storage, clone} from '../core/utils';
+import {clone} from '../core/utils';
 import {initialState} from '../vars';
 
 const defaultState = {
@@ -13,4 +13,4 @@ const defaultState = {
 };
 
 const setDefaultState = () => clone(defaultState);
-export const initStore = (id) => storage(id) || setDefaultState();
+export const initStore = (state) => state || setDefaultState();

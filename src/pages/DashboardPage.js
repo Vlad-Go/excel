@@ -1,5 +1,5 @@
 import {$} from '../core/Dom';
-import {Page} from '../core/Page';
+import {Page} from '../core/page/Page';
 import {getTables} from './dashboard.functions';
 
 const createHash = () => {
