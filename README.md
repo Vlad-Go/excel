@@ -1,3 +1,3 @@
 # Pure js excel
 
-Open JS-Excel [Excel](/distt/)
+Open JS-Excel [https://vlad-go.github.io/excel/.](/https://vlad-go.github.io/excel/)
