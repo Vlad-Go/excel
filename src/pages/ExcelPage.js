@@ -1,5 +1,5 @@
 
-import { Excel } from '../components/Excel/Excel';
+import {Excel} from '../components/Excel/Excel';
 import {Formula} from '../components/formula/Formula';
 import {Header} from '../components/header/Header';
 import {Table} from '../components/table/Table';

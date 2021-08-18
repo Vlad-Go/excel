@@ -1,5 +1,6 @@
 import {Loader} from '../../components/Loader/Loader';
 import {$} from '../Dom';
+import {setHeight} from '../utils';
 import {getHash} from './router.functions';
 
 export class Router {
@@ -11,6 +12,8 @@ export class Router {
   }
   init() {
     window.addEventListener('hashchange', this.pageChangeHandle);
+    window.addEventListener('resize', setHeight);
+    setHeight();
     this.pageChangeHandle();
   }
   async pageChangeHandle() {
@@ -18,7 +21,6 @@ export class Router {
       this.page.destroy();
     }
     this.$placeholder.clear().append(this.loader);
-    debugger
 
     const hash = getHash();
     const Page = hash.includes('excel') ?

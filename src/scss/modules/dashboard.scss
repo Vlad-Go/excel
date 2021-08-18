@@ -35,6 +35,8 @@
    &__create-cards {
       margin-top: 20px;
       display: flex;
+      overflow-x: auto;
+      padding-bottom: 20px;
    }
    // .dashboard__create-item
    &__create-item {
@@ -153,4 +155,14 @@
    text-align: center;
    margin-top: 100px;
    font-size: 18px;
+}
+
+@media (max-width:500px) {
+   .dashboard__table-date {
+      color: #545454;
+      font-size: 10px;
+      text-align: center;
+      line-height: initial;
+      flex: 0;
+  }
 }

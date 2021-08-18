@@ -1,5 +1,9 @@
 import {getTableId} from './Router/router.functions';
 
+
+export const setHeight = () => {
+  document.body.style.height = window.innerHeight + 'px';
+};
 export const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };

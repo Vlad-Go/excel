@@ -13,7 +13,7 @@ export class LocalStorageProcessor {
       const state = storage(this.table_id);
       setTimeout(() => {
         resolve(state);
-      }, 2500);
+      }, 1500);
     });
   }
 }

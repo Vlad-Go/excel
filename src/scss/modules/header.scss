@@ -42,3 +42,22 @@
      @include btn($main);
    }
 }
+@media (max-width: 400px) {
+   .excel__header {
+      flex-wrap: wrap-reverse;
+      &-box{
+         width: 100%;
+         justify-content: flex-end;
+         &:first-child{
+            margin: 10px 0;
+         }
+     }
+     &-title{
+        flex:1;
+     }
+  }
+   .main-img {
+      width: 25px;
+      height: 25px;
+   }
+}
